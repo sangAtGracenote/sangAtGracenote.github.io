@@ -59,7 +59,7 @@
             button1.draw();
             var startingTimestamp = 0;
             window.speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to text to speech generator/annotator."));
-
+            var prevIndex = 0;
             button1.on('*', function(data) {
                 var voices = window.speechSynthesis.getVoices();
                 //console.log(voices);
@@ -84,10 +84,21 @@
                     var newWord = txt.substring(event.charIndex);
                     newWord = newWord.substring(0,newWord.indexOf(' '));
 
-                    var output = "index : " + event.charIndex  + "\tchar:" + txt[event.charIndex] + "\ttime:" + (d - startingTimestamp)+  "\n";
+                    var output = "id : " + event.charIndex  +"\tt:" + (d - startingTimestamp);
+                    if (event.charIndex > 0){
+                        output = "\tw:" + txt.substring(prevIndex, event.charIndex) +  "\n" + output
+                        prevIndex = event.charIndex;
+                    }
+
                     $('#text_annotated').val($('#text_annotated').val() + output); 
                     //$('#text_annotated').val(wordssofar +":"+ newWord); 
                     console.log(output);
+                }
+
+                foo.onend = function(event){
+                    var output = "\tw:" + txt.substring(prevIndex) +  "\n" ;
+                    $('#text_annotated').val($('#text_annotated').val() + output); 
+                    prevIndex = 0;
                 }
                 window.speechSynthesis.speak(foo);
 
