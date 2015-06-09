@@ -86,7 +86,7 @@
 
                     var output = "id : " + event.charIndex  +"\tt:" + (d - startingTimestamp);
                     if (event.charIndex > 0){
-                        output = "\tw:" + txt.substring(prevIndex, event.charIndex) +  "\n" + output
+                        output = "\tw:" + txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") +  "\n" + output
                         prevIndex = event.charIndex;
                     }
 
