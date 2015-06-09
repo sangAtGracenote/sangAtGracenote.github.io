@@ -2,6 +2,7 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="./js/nexusUI.js"></script>
+
         <link rel="stylesheet" href="./css/main.css"/>
         <title>Generate Text To Speech Annotation</title>
     </head>
@@ -14,6 +15,11 @@
             <textarea  class="width_50" name="text_annotated" id ="text_annotated" rows="50"></textarea>
         </div> 
         <div class="width_50">
+            <div>
+                voice <select id="voiceSelect" size="1" >
+                    
+                </select>
+            </div>
             <div>
                 pitch <canvas nx="slider"width = 200 height=20></canvas> <span id = "pitch_value"></span>
             </div>
@@ -58,10 +64,25 @@
             button1.mode = "impulse";
             button1.draw();
             var startingTimestamp = 0;
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance("Welcome to text to speech generator/annotator."));
+            var welcome = new SpeechSynthesisUtterance("Welcome to text to speech generator/annotator.");
+
+            window.speechSynthesis.speak(welcome);
             var prevIndex = 0;
+            var voices = window.speechSynthesis.getVoices();
+            var voiceValue = 10;
+            welcome.onend = function (event){
+                voices = window.speechSynthesis.getVoices();
+                $.each(voices, function(index, value) {
+                    if(value.localService)
+                        $('#voiceSelect').append($('<option>').text(value.name + "(" + value.lang + ")").attr('value', index));
+                });
+                $('#voiceSelect').change(function(){
+                    voiceValue = this.value;
+                });
+
+            }
+
             button1.on('*', function(data) {
-                var voices = window.speechSynthesis.getVoices();
                 //console.log(voices);
                 txt = $("#text").val();
                 if (txt==""){
@@ -69,12 +90,13 @@
                 }
                     
                 foo = new SpeechSynthesisUtterance(txt);
-                foo.lang = "en-US";
-                foo.voice = voices[10];
+                foo.lang = voices[voiceValue].lang;
+                
+                foo.voice = voices[voiceValue];
                 foo.pitch = pitch;
                 foo.rate = rate;
                 
-                foo.voiceURI = 'native';
+                foo.voiceURI = voices[voiceValue].voiceURI;
                 foo.volume = 0.5;
                 $('#text_annotated').val("");
                 foo.onboundary = function(event){
