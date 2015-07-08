@@ -203,6 +203,7 @@ function initHightlight(){
 }
 
 function initLyric(content){
+    $("#lyric_display").html("");
     timestamps = content.split("\n");
     var line_cnt = 0;
     var line_start = true;
