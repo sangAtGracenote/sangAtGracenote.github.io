@@ -30,7 +30,6 @@
 
             </fieldset>
 
-            </form>
             
             <fieldset id="playwave" width = "100%">
                 
@@ -38,15 +37,20 @@
                 
                 <button onclick="playSound()"  id ="startbutton">Start</button>
                 <button onclick="stopSound()"  id ="stopbutton">Stop</button>
-            
+                <input type="radio" name="sync_level" value="line" checked>line</td>
+                <input type="radio" name="sync_level" value="word">word</td>
             </fieldset>
+
+            </form>
+
 
             <div id="messages">
             <p>Status Messages</p>
             </div>
         </div> 
         <div class="width_50"> 
-            <textarea  class="" name="text_annotated" id ="text_annotated" rows="50"></textarea>
+            <div id="lyric_display">
+            </div>
         </div> 
     </body>
         <script src="./js/lyric_display.js"></script>
