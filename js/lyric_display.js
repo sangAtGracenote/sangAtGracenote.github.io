@@ -114,7 +114,6 @@ function Init() {
         var s = $("#demo_options");
         for (var i in demo_list) {
             s.append($('<option/>').attr("value",i).html(demo_list[i].artist + " - " + demo_list[i].title));
-            soundmap[i] = demo_list[i].music_filename;
         }
         s.prop("disabled",false); 
     })
