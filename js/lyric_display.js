@@ -105,8 +105,7 @@ function Init() {
     var s = $("#demo_options");
     s.prop("disabled",true); 
     s.change(function() {
-        alert($("#demo_options").val());
-        audioBuffer = demoBuffers
+        initSound(demoBuffers[$("#demo_options").val()])
     });
 
     loadSounds(demoBuffers, soundMap, function(){
@@ -117,7 +116,6 @@ function Init() {
         }
         s.prop("disabled",false); 
     })
-
 
 
 }
