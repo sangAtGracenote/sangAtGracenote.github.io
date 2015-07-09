@@ -104,6 +104,7 @@ function Init() {
             demoBuffers[i] = buffer;
             var s = $("#demo_options");
             s.append($('<option/>').attr("value",i).html(demo_list[i].artist + " - " + demo_list[i].title));
+            console.log("loaded:" + demo_list[i].title);
             s.prop("disabled",false); 
         });
     }
