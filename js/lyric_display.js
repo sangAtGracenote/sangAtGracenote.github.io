@@ -11,6 +11,20 @@ return  window.requestAnimationFrame       ||
 };
 })();
 
+var context = new window.AudioContext();
+var source = null;
+var audioBuffer = null;
+var words = {};
+var word_timestamps = {};
+var lines = {}; 
+var line_timestamps = {}; 
+var currentWordIndex = 0;
+var currentLineIndex = 0;
+var startTime = 0;
+var playing = false;
+var line_level_sync = true;
+demoBuffers = {};
+
 
 function Output(msg) {
     var m = $("#messages");
@@ -71,7 +85,6 @@ function FileSelectHandler(e) {
 
 }
 
-demoBuffers = {};
 
 function Init() {
 
@@ -112,7 +125,8 @@ function Init() {
     var s = $("#demo_options");
     s.prop("disabled",true); 
     s.change(function() {
-        initSound(demoBuffers[$("#demo_options").val()])
+        $("#playwave").css("display", "inherit");
+        audioBuffer = demoBuffers[$("#demo_options").val()];
     });
 
 
@@ -120,19 +134,6 @@ function Init() {
 }
 
 
-
-var context = new window.AudioContext();
-var source = null;
-var audioBuffer = null;
-var words = {};
-var word_timestamps = {};
-var lines = {}; 
-var line_timestamps = {}; 
-var currentWordIndex = 0;
-var currentLineIndex = 0;
-var startTime = 0;
-var playing = false;
-var line_level_sync = true;
 
 
 loadBuffer = function(url, callback) {
