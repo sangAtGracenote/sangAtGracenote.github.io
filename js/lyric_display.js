@@ -142,7 +142,7 @@ loadBuffer = function(url, callback) {
 
   request.onload = function() {
     // Asynchronously decode the audio file data in request.response
-    loader.context.decodeAudioData(
+    context.decodeAudioData(
       request.response,
       callback,
       function(error) {
