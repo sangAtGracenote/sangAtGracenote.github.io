@@ -117,7 +117,6 @@ function Init() {
     for (var i in demo_list) {
         soundMap[i] = "./lyric_sync_data/demo/" + demo_list[i].music_filename;
         lyricMap[i] = "./lyric_sync_data/demo/" + demo_list[i].timestamps_filename;
-        console.log("for" + i);
         loadBuffer(soundMap[i], i, function(index){
             var s = $("#demo_options");
             s.append($('<option/>').attr("value",index).html(demo_list[index].artist + " - " + demo_list[index].title));
@@ -135,6 +134,7 @@ function Init() {
         audioBuffer = demoBuffers[$("#demo_options").val()];
         $("#startbutton").prop("disabled",false);
         initLyric(demoLyrics[$("#demo_options").val()]);
+        stopSound();
     });
 
 }
@@ -147,7 +147,6 @@ loadBuffer = function(url, i, callback) {
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.responseType = "arraybuffer";
-  console.log("url"+ url);
   request.onload = function() {
     // Asynchronously decode the audio file data in request.response
     context.decodeAudioData(
@@ -173,7 +172,6 @@ loadLyric = function(url, i, callback) {
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
   //request.responseType = "arraybuffer";
-  console.log("url"+ url);
   request.onload = function() {
     // Asynchronously decode the audio file data in request.response
     demoLyrics[i] = request.responseText;
@@ -197,7 +195,9 @@ function stopSound() {
         $("#stopbutton").prop("disabled",true);        
         playing = false;
         initHightlight();
+        source = null;
     }
+
 }
 
 var animate = function(t) {
@@ -249,7 +249,7 @@ function playSound() {
     playing = true;
     animate(Date.now());
     line_level_sync = $('input[name=sync_level]:checked', '#upload').val() == "line";
-    console.log(line_level_sync);
+   // console.log(line_level_sync);
     initHightlight();
 }
 
