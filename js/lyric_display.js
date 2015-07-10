@@ -113,11 +113,10 @@ function Init() {
     var soundMap = {};
     for (var i in demo_list) {
         soundMap[i] = "./lyric_sync_data/demo/" + demo_list[i].music_filename;
-        loadBuffer(soundMap[i], function(buffer){
-            demoBuffers[i] = buffer;
+        loadBuffer(soundMap[i], function(index){
             var s = $("#demo_options");
-            s.append($('<option/>').attr("value",i).html(demo_list[i].artist + " - " + demo_list[i].title));
-            console.log("loaded:" + demo_list[i].title);
+            s.append($('<option/>').attr("value",index).html(demo_list[index].artist + " - " + demo_list[index].title));
+            console.log("loaded:" + demo_list[index].title);
             s.prop("disabled",false); 
         });
     }
@@ -127,6 +126,8 @@ function Init() {
     s.change(function() {
         $("#playwave").css("display", "inherit");
         audioBuffer = demoBuffers[$("#demo_options").val()];
+        $("#startbutton").prop("disabled",false);
+
     });
 
 
@@ -136,7 +137,7 @@ function Init() {
 
 
 
-loadBuffer = function(url, callback) {
+loadBuffer = function(url, i, callback) {
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
@@ -146,7 +147,10 @@ loadBuffer = function(url, callback) {
     // Asynchronously decode the audio file data in request.response
     context.decodeAudioData(
       request.response,
-      callback,
+      function(buffer){
+        demoBuffers[i] = buffer;
+        callback(i);
+      } ,
       function(error) {
         console.error('decodeAudioData error', error);
       }
