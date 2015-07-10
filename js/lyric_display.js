@@ -119,6 +119,7 @@ function Init() {
         lyricMap[i] = "./lyric_sync_data/demo/" + demo_list[i].timestamps_filename;
         loadLyric(lyricMap[i], i);
         loadBuffer(soundMap[i], i, function(index){
+            $("#default_msg_option").text("Select Demo");
             var s = $("#demo_options");
             s.append($('<option/>').attr("value",index).html(demo_list[index].artist + " - " + demo_list[index].title));
             console.log("loaded:" + demo_list[index].title);
