@@ -295,5 +295,4 @@ if (!window.AudioContext) {
     alert('The Web Audio API is not supported in your browser!');
 }
 
-Init()
 
