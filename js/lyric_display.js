@@ -172,7 +172,7 @@ loadLyric = function(url, i, callback) {
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
-  request.responseType = "arraybuffer";
+  //request.responseType = "arraybuffer";
   console.log("url"+ url);
   request.onload = function() {
     // Asynchronously decode the audio file data in request.response
