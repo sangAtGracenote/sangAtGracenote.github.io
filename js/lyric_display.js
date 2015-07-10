@@ -117,14 +117,13 @@ function Init() {
     for (var i in demo_list) {
         soundMap[i] = "./lyric_sync_data/demo/" + demo_list[i].music_filename;
         lyricMap[i] = "./lyric_sync_data/demo/" + demo_list[i].timestamps_filename;
+        loadLyric(lyricMap[i], i);
         loadBuffer(soundMap[i], i, function(index){
             var s = $("#demo_options");
             s.append($('<option/>').attr("value",index).html(demo_list[index].artist + " - " + demo_list[index].title));
             console.log("loaded:" + demo_list[index].title);
             s.prop("disabled",false); 
         });
-
-        loadLyric(lyricMap[i], i);
     }
  
     var s = $("#demo_options");
@@ -136,11 +135,7 @@ function Init() {
         initLyric(demoLyrics[$("#demo_options").val()]);
         stopSound();
     });
-
 }
-
-
-
 
 loadBuffer = function(url, i, callback) {
   // Load buffer asynchronously
