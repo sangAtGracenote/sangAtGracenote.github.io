@@ -113,7 +113,7 @@ function Init() {
     var soundMap = {};
     for (var i in demo_list) {
         soundMap[i] = "./lyric_sync_data/demo/" + demo_list[i].music_filename;
-
+        console.log("for" + i);
         loadBuffer(soundMap[i], i, function(index){
             var s = $("#demo_options");
             s.append($('<option/>').attr("value",index).html(demo_list[index].artist + " - " + demo_list[index].title));
