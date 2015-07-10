@@ -23,7 +23,8 @@ var currentLineIndex = 0;
 var startTime = 0;
 var playing = false;
 var line_level_sync = true;
-demoBuffers = {};
+var demoBuffers = {};
+var demoLyrics = {};
 
 
 function Output(msg) {
@@ -111,8 +112,11 @@ function Init() {
     }
 
     var soundMap = {};
+    var lyricMap = {};
+
     for (var i in demo_list) {
         soundMap[i] = "./lyric_sync_data/demo/" + demo_list[i].music_filename;
+        lyricMap[i] = "./lyric_sync_data/demo/" + demo_list[i].timestamps_filename;
         console.log("for" + i);
         loadBuffer(soundMap[i], i, function(index){
             var s = $("#demo_options");
@@ -120,6 +124,8 @@ function Init() {
             console.log("loaded:" + demo_list[index].title);
             s.prop("disabled",false); 
         });
+
+        loadLyric(lyricMap[i], i);
     }
  
     var s = $("#demo_options");
@@ -128,6 +134,7 @@ function Init() {
         $("#playwave").css("display", "inherit");
         audioBuffer = demoBuffers[$("#demo_options").val()];
         $("#startbutton").prop("disabled",false);
+        initLyric(demoLyrics[$("#demo_options").val()]);
     });
 
 }
@@ -148,11 +155,29 @@ loadBuffer = function(url, i, callback) {
       function(buffer){
         demoBuffers[i] = buffer;
         callback(i);
-      } ,
+      },
       function(error) {
         console.error('decodeAudioData error', error);
       }
     );
+  }
+
+  request.onerror = function() {
+    alert('BufferLoader: XHR error');
+  }
+  request.send();
+};
+
+loadLyric = function(url, i, callback) {
+  // Load buffer asynchronously
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
+  console.log("url"+ url);
+  request.onload = function() {
+    // Asynchronously decode the audio file data in request.response
+    demoLyrics[i] = request.responseText;
+    console.log("demo lyric uploaded:" + i);
   }
 
   request.onerror = function() {
