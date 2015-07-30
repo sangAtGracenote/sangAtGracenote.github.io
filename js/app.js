@@ -72,6 +72,40 @@ var drawVisual;
 
 //main block for doing the audio recording
 
+if (navigator.getUserMedia) {
+   console.log('getUserMedia supported.');
+   navigator.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      },
+
+      // Success callback
+      function(stream) {
+         source = audioCtx.createMediaStreamSource(stream);
+         source.connect(analyser);
+         analyser.connect(gainNode);
+         gainNode.connect(audioCtx.destination);
+         console.log('streamMedia Success');
+
+		var oscillator = audioCtx.createOscillator();
+
+		oscillator.type = 'sine';
+		oscillator.frequency.value = 20000; // value in hertz
+		oscillator.start();
+
+		oscillator.connect(analyser);
+      	 visualize();
+      },
+
+      // Error callback
+      function(err) {
+         console.log('The following gUM error occured: ' + err);
+      }
+   );
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
 
 function visualize() {
 	WIDTH = canvas.width;
