@@ -169,9 +169,6 @@ function voiceChange() {
 
 }
 
-// event listeners to change visualize and voice settings
-
-
 function voiceMute() {
   if(mute.id == "") {
     gainNode.gain.value = 0;
@@ -183,6 +180,12 @@ function voiceMute() {
     mute.innerHTML = "Mute";
   }
 }
+
+// event listeners to change visualize and voice settings
+
+var mute = document.querySelector('.mute');
+mute.onclick = voiceMute;
+
 
 
 
