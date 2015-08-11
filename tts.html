@@ -67,10 +67,12 @@
 
             window.speechSynthesis.speak(welcome);
             var prevIndex = 0;
-            var voices = window.speechSynthesis.getVoices();
+            //var voices = window.speechSynthesis.getVoices();
             var voiceValue = 10;
             welcome.onend = function (event){
                 voices = window.speechSynthesis.getVoices();
+                if (voices.length == 0)
+                    alert("voices not loaded");
                 $.each(voices, function(index, value) {
                     if(value.localService)
                         $('#voiceSelect').append($('<option>').text(value.name + "(" + value.lang + ")").attr('value', index));
