@@ -70,6 +70,7 @@
             //var voices = window.speechSynthesis.getVoices();
             var voiceValue = 10;
             welcome.onend = function (event){
+                console.log("speech ended. Voices loading...")
                 voices = window.speechSynthesis.getVoices();
                 if (voices.length == 0)
                     alert("voices not loaded");
