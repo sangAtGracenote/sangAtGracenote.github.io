@@ -119,8 +119,8 @@ textarea {  /* position is inherited */
     box-shadow: none;
  /*   outline:0px /*!important;*/;*/
     -webkit-appearance:none;
-    font-size: 20pt;
-    font-family: Courier New;
+    font-size: 10pt;
+    
 }
  .slider{
          font-family: Courier New;   
