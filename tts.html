@@ -65,7 +65,6 @@
             var startingTimestamp = 0;
             var welcome = new SpeechSynthesisUtterance("Welcome to text to speech generator/annotator.");
 
-            window.speechSynthesis.speak(welcome);
             var prevIndex = 0;
             //var voices = window.speechSynthesis.getVoices();
             var voiceValue = 10;
@@ -83,6 +82,9 @@
                 });
 
             }
+
+            window.speechSynthesis.speak(welcome);
+
 
             button1.on('*', function(data) {
                 //console.log(voices);
