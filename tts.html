@@ -110,9 +110,9 @@
                     var newWord = txt.substring(event.charIndex);
                     newWord = newWord.substring(0,newWord.indexOf(' '));
 
-                    var output ="";
+                    var output = "" + (d - startingTimestamp);
                     if (event.charIndex > 0){
-                        output = txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") + "," + + (d - startingTimestamp)+ "\n" + output
+                        output = txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") +  "," + output+"\n";
                         prevIndex = event.charIndex;
                     }
 
@@ -122,7 +122,7 @@
                 }
 
                 foo.onend = function(event){
-                    var output = "\tw:" + txt.substring(prevIndex) +  "\n" ;
+                    var output = "," + txt.substring(prevIndex) +  "\n" ;
                     $('#text_annotated').val($('#text_annotated').val() + output); 
                     prevIndex = 0;
                 }
