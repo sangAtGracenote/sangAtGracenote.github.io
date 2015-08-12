@@ -110,23 +110,22 @@
                     var wordssofar= txt.substring(0, event.charIndex);
                     var newWord = txt.substring(event.charIndex);
                     newWord = newWord.substring(0,newWord.indexOf(' '));
-
-                    output[output.length]["time"] = (d - startingTimestamp);
                     if (event.charIndex > 0){
                         output[output.length-1]["word"] =  txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"");
+                        output[output.length-1]["word"] =output[output.length-1]["word"].replace(",", "").trim();
                         prevIndex = event.charIndex;
-                        $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," +output[output.length-1]["time"]); 
+                        $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," +output[output.length-1]["time"] + "\n"); 
 
                     }
 
-                    $('#text_annotated').val($('#text_annotated').val() + output[]); 
-                    //$('#text_annotated').val(wordssofar +":"+ newWord); 
-                    console.log(output);
+                    output[output.length] = {};
+                    output[output.length-1]["time"] = (d - startingTimestamp);
+
                 }
 
                 foo.onend = function(event){
                     output[output.length-1]["word"] =  txt.substring(prevIndex);
-                    $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," +output[output.length-1]["time"]); 
+                    $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," +output[output.length-1]["time"]+ "\n"); 
                     prevIndex = 0;
                 }
                 window.speechSynthesis.speak(foo);

@@ -277,9 +277,13 @@ function initLyric(content){
     var lyric_html = $('<div></div>');
     for (var i=0; i<timestamps.length; i++){
         var str_label_time = timestamps[i].split("\t");
-        words[i] = (str_label_time[0]);
+        words[i] = (str_label_time[0].trim());
         word_timestamps[i] = parseFloat(str_label_time[1]) * 1000; // ms
-        if (str_label_time[0].trim()=="."){ // end of line 
+        if (words[i] .trim()=="." || words[i].indexOf(".", words[i].length - 1) !== -1){ // end of line 
+            if (words[i].indexOf(".", str_label_time[0].trim().length - 1))
+                line += " " + words[i];
+                line_html.append("<span id=word_" + i + ">" +  words[i]+ "&nbsp;</span>");
+
             lines[line_cnt] = line
             line = "";
             line_start = true;
