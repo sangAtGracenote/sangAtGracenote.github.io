@@ -103,6 +103,7 @@
                 foo.voiceURI = voices[voiceValue].voiceURI;
                 foo.volume = 0.5;
                 $('#text_annotated').val("");
+                output = [];
                 foo.onboundary = function(event){
                     var d = (new Date()).getTime();
                     if ( event.charIndex == 0) startingTimestamp = d;
@@ -110,20 +111,22 @@
                     var newWord = txt.substring(event.charIndex);
                     newWord = newWord.substring(0,newWord.indexOf(' '));
 
-                    var output = "" + (d - startingTimestamp);
+                    output[output.length]["time"] = (d - startingTimestamp);
                     if (event.charIndex > 0){
-                        output = txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") +  "," + output+"\n";
+                        output[output.length-1]["word"] =  txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"");
                         prevIndex = event.charIndex;
+                        $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," output[output.length-1]["time"]); 
+
                     }
 
-                    $('#text_annotated').val($('#text_annotated').val() + output); 
+                    $('#text_annotated').val($('#text_annotated').val() + output[]); 
                     //$('#text_annotated').val(wordssofar +":"+ newWord); 
                     console.log(output);
                 }
 
                 foo.onend = function(event){
-                    var output = "," + txt.substring(prevIndex) +  "\n" ;
-                    $('#text_annotated').val($('#text_annotated').val() + output); 
+                    output[output.length-1]["word"] =  txt.substring(prevIndex);
+                    $('#text_annotated').val($('#text_annotated').val() + output[output.length-1]["word"] + "," output[output.length-1]["time"]); 
                     prevIndex = 0;
                 }
                 window.speechSynthesis.speak(foo);
