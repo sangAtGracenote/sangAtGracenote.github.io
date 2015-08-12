@@ -108,9 +108,9 @@
                     var newWord = txt.substring(event.charIndex);
                     newWord = newWord.substring(0,newWord.indexOf(' '));
 
-                    var output = "id : " + event.charIndex  +"\tt:" + (d - startingTimestamp);
+                    var output ="";
                     if (event.charIndex > 0){
-                        output = "\tw:" + txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") +  "\n" + output
+                        output = txt.substring(prevIndex, event.charIndex).replace(/(\r\n|\n|\r)/gm,"") + "," + + (d - startingTimestamp)+ "\n" + output
                         prevIndex = event.charIndex;
                     }
 
