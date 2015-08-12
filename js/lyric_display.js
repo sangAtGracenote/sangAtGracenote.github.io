@@ -59,7 +59,7 @@ function FileSelectHandler(e) {
     // process all File objects
     for (var i = 0, f; f = files[i]; i++) {
         ParseFile(f);
-        if (f.type == "audio/wav")
+        if (f.type == "audio/wav" || f.type == "audio/mpeg")
         {
             Output("<p>sound file is ready!</p>");
             $("#playwave").css("display", "inherit");
