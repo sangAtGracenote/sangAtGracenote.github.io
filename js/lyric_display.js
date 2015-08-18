@@ -209,14 +209,18 @@ var animate = function(t) {
             $("#line_"+(currentLineIndex-1)).toggleClass("lyric_hightlight");
     }
     else{
+        var prevCurIndex = currentWordIndex;
         while ( currentTime > word_timestamps[currentWordIndex]){
             currentWordIndex++;
             while(word_timestamps[currentWordIndex] == "undefined")
                 currentWordIndex++;
             increased = true;
         }
-        if (increased)
-            $("#word_"+(currentWordIndex-1)).toggleClass("lyric_hightlight");
+        var cnt = 0
+        while (prevCurIndex !=currentWordIndex - cnt){ 
+            cnt ++;
+            $("#word_"+(currentWordIndex-cnt)).toggleClass("lyric_hightlight");
+        }
     }
 
     if ( currentTime > word_timestamps[words.length-1])
