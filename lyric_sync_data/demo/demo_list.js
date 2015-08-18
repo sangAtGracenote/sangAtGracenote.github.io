@@ -40,5 +40,24 @@ demo_list = [
 		"title": "Back Home To Blue",
 		"music_filename": "07.wav", 
 		"timestamps_filename": "07_8.txt"
+	},
+	{
+		"artist": "2NE1",
+		"title": "내가 제일 잘 나가",
+		"music_filename": "2ne1_I_am_the_best.wav", 
+		"timestamps_filename": "2ne1_I_am_the_best.txt"
+	},
+	{
+		"artist": "ABBA",
+		"title": "Dancing Queen",
+		"music_filename": "abba.wav", 
+		"timestamps_filename": "abba.txt"
+	}
+	,
+	{
+		"artist": "Notorious B.I.G.",
+		"title": "Big Poppa",
+		"music_filename": "biggie.wav", 
+		"timestamps_filename": "biggie.txt"
 	}
 ];
