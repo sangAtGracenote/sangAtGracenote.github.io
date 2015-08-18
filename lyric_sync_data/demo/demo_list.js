@@ -50,14 +50,57 @@ demo_list = [
 	{
 		"artist": "ABBA",
 		"title": "Dancing Queen",
-		"music_filename": "abba.wav", 
+		"music_filename": "abba.mp3", 
 		"timestamps_filename": "abba.txt"
 	}
 	,
 	{
 		"artist": "Notorious B.I.G.",
 		"title": "Big Poppa",
-		"music_filename": "biggie.wav", 
+		"music_filename": "biggie.mp3", 
 		"timestamps_filename": "biggie.txt"
 	}
+	,
+	{
+		"artist": "Daft Punk",
+		"title": "Harder, Better, Faster, Stronger",
+		"music_filename": "daft_punk.wav", 
+		"timestamps_filename": "daft_punk.txt"
+	}
+	,
+	{
+		"artist": "Michael Jackson",
+		"title": "The way you make me feel",
+		"music_filename": "jackson.wav", 
+		"timestamps_filename": "jackson.txt"
+	}
+	,
+	{
+		"artist": "Metalica",
+		"title": "Enter Sandman",
+		"music_filename": "metalica.wav", 
+		"timestamps_filename": "metalica.txt"
+	}
+	,
+	{
+		"artist": "Alanis Morissette",
+		"title": "Hand in my pocket",
+		"music_filename": "hand.wav", 
+		"timestamps_filename": "hand.txt"
+	}
+	,
+	{
+		"artist": "Taylor Swift",
+		"title": "Shake it off",
+		"music_filename": "swift.wav", 
+		"timestamps_filename": "swift.txt"
+	}
+	,
+	{
+		"artist": "",
+		"title": "",
+		"music_filename": ".wav", 
+		"timestamps_filename": ".txt"
+	}
+
 ];
