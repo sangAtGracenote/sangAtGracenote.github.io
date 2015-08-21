@@ -97,10 +97,10 @@ demo_list = [
 	}
 	,
 	{
-		"artist": "",
-		"title": "",
-		"music_filename": ".wav", 
-		"timestamps_filename": ".txt"
+		"artist": "Smashing Pumpkins",
+		"title": "1979",
+		"music_filename": "1979.wav", 
+		"timestamps_filename": "1979.txt"
 	}
 
 ];
